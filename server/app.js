@@ -2,11 +2,16 @@ const express = require('express')
 const connectDB = require('./ConnectDb/DB')
 const mainRoute = require('./Routes/Routes')
 const errorHandler = require("./Middleware/errorHandler")
+const cors = require('cors')
 
 
 require('dotenv').config()
 
 const app = express()
+
+app.use(cors({
+    origin:'http://localhost:5173',
+}))
 
 app.use(express.json())
 app.use("/",mainRoute)

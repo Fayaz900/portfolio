@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import portfolio from "../data/portfolio";
 import PortfolioItem from "./PortfolioItem";
+import axios from 'axios'
+
 
 function Portfolio() {
+  const [projects,setProjects] = useState([])
+
+  const fetchProjects=async()=>{
+    const response = await axios.get('http://localhost:8980/getall')
+    .catch(error=>console.log(error))
+    setProjects(response.data)
+  }
+
+  useEffect(()=>{
+    fetchProjects()
+  },[])
+console.log(projects);
   return (
     <div>
       <h2 className="text-2xl font-bold mb-1 text-stone-900 dark:text-white text-center ">
@@ -12,12 +26,12 @@ function Portfolio() {
       <div className="relative border-t border-slate-400 dark:border-slate-700 mb-5" />
       <div className="flex flex-col md:flex-row items-center justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {portfolio.map((project) => (
-            <PortfolioItem
-              imgUrl={project.imgUrl}
+          {projects.map((project,index) => (
+            <PortfolioItem key={index}
+              imgUrl={project.image}
               title={project.title}
               stack={project.stack}
-              link={project.link}
+              link={project.url}
             />
           ))}
         </div>

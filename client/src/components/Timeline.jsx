@@ -10,8 +10,8 @@ function Timeline() {
         <h2 className="text-2xl font-bold underline underline-offset-8 decoration-4 mb-5 text-stone-900 dark:text-white">
           Timeline
         </h2>
-        {timeline.map((item) => (
-          <TimelineItem
+        {timeline.map((item,index) => (
+          <TimelineItem key={index}
             year={item.year}
             title={item.title}
             duration={item.duration}

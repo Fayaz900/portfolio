@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Card from "../components/Card/Card";
 import { properties } from "../constants/data";
+import axios from "axios";
 
 const Projects = () => {
+  const [projects,setProjects] = useState([])
+
+  const fetchProjects=async()=>{
+    const response = await axios.get('http://localhost:8980/getall')
+    .catch(error=>console.log(error))
+    setProjects(response.data)
+  }
+
+  useEffect(()=>{
+    fetchProjects()
+  },[])
   return (
     <>
       <AnimatePresence>
@@ -27,8 +39,8 @@ const Projects = () => {
         >
           <div className="flex flex-col md:flex-row items-center justify-center">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {properties.map((item) => (
-                <Card data={item} key={item.id} />
+              {projects.map((item,index) => (
+                <Card data={item} key={index} />
               ))}
             </div>
           </div>

@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import { AnimatePresence } from "framer-motion";
 
 const Card = ({ data }) => {
+  console.log(data,"daa");
   const [open, setOpen] = useState(false);
 
   const openModal = () => {
