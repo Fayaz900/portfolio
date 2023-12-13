@@ -7,6 +7,7 @@ import Projects from "./components/Projects";
 import HomePage from "./components/HomePage";
 import Error404 from "./components/error404";
 import RingLoader from "react-spinners/RingLoader";
+import Home from "./components/admin/Home";
 
 function App() {
   const [theme, setTheme] = useState(null);
@@ -105,6 +106,7 @@ function App() {
                   <Route path="/projects" element={<Projects />} />
                   <Route path="/404" element={<Error404 />} />
                   <Route path="*" element={<Navigate to="/404" />} />
+                  <Route path="/admin" element={<Home/>}/>
                 </Routes>
                 <Footer />
               </div>
